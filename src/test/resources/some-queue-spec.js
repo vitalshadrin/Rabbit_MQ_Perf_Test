@@ -12,7 +12,10 @@
                "A4"
             ],
             "json-body" : true,
-            "body-field-count" : 3
+            "body-field-count" : 3,
+            "queue-arguments" : {
+                "x-single-active-consumer" : true
+            }
          }
       ],
       "variables":[
