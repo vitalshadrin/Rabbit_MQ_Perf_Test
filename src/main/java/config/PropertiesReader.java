@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static report.ReportTemplate.getResultDirectory;
-
 public class PropertiesReader {
     private Properties properties;
-    private String propertyName;
+    private final String propertyName;
 
     public PropertiesReader(String propertyName) {
         this.propertyName = propertyName;
@@ -25,15 +23,12 @@ public class PropertiesReader {
         return properties;
     }
 
-    public Properties updateProperty(String propertyName, String key, String value){
-        try {
-            FileOutputStream out = new FileOutputStream(propertyName);
+    public void updateProperty(String key, String value) {
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/" + propertyName)) {
             properties.setProperty(key, value);
             properties.store(out, null);
-            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return properties;
     }
 }

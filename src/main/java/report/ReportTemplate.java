@@ -17,9 +17,16 @@ public class ReportTemplate {
         Path path = Paths.get("results");
         try {
             Path resultsDir = !Files.exists(path) ? Files.createDirectory(path) : path;
-            Path resultDir = Paths.get(resultsDir + "/" + (nameResults.contains(".js") ? "perfTestMulti" : "perfTest") + "_result_" + getCurrentDate());
-            FileUtils.copyDirectory(new File(REPORT_TEMPLATE), new File(resultDir.toString()));
-            Path file = Paths.get(resultDir + "/html/" + nameResults);
+            Path resultDir;
+            Path file;
+            if (nameResults.contains(".js")) {
+                resultDir = Paths.get(resultsDir + "/perfTestMulti_result_" + getCurrentDate());
+                FileUtils.copyDirectory(new File(REPORT_TEMPLATE), new File(resultDir.toString()));
+                file = Paths.get(resultDir + "/html/" + nameResults);
+            } else {
+                resultDir = Files.createDirectory(Paths.get(resultsDir + "/perfTest_result_" + getCurrentDate()));
+                file = Paths.get(resultDir + "/" + nameResults);
+            }
             return Files.createFile(file).toString();
         } catch (IOException e) {
             e.printStackTrace();

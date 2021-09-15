@@ -19,7 +19,7 @@ public class ArgsGenerator {
                 listArgs.add(getResultDirectory("spec_results.js"));
                 args = listArgs.toArray(String[]::new);
             } else {
-                propertiesReader.updateProperty(propertyName, "output-file", getResultDirectory("results.csv"));
+                propertiesReader.updateProperty("output-file", getResultDirectory("results.csv"));
                 args = properties
                         .keySet()
                         .stream()
