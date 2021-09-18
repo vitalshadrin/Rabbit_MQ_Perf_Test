@@ -4,7 +4,7 @@
       "type":"simple",
       "params":[
          {
-            "time-limit": 60,
+            "time-limit": 300,
             "queue-names":[
                "A1",
                "A2",
@@ -12,23 +12,10 @@
                "A4"
             ],
             "json-body" : true,
-            "body-field-count" : 3,
+            "body-field-count" : 7,
             "queue-arguments" : {
                 "x-single-active-consumer" : true
             }
-         }
-      ],
-      "variables":[
-         {
-            "name":"min-msg-size",
-            "values":[
-               0,
-               100,
-               200,
-               500,
-               1000,
-               2000
-            ]
          }
       ]
    }

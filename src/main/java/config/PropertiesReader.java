@@ -24,7 +24,7 @@ public class PropertiesReader {
     }
 
     public void updateProperty(String key, String value) {
-        try (FileOutputStream out = new FileOutputStream("src/main/resources/" + propertyName)) {
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/config/" + propertyName)) {
             properties.setProperty(key, value);
             properties.store(out, null);
         } catch (IOException e) {

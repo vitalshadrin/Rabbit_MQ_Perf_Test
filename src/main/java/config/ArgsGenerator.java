@@ -15,9 +15,9 @@ public class ArgsGenerator {
             Properties properties = propertiesReader.getProperties();
             if (propertyName.contains("Multi")) {
                 List<String> listArgs = new ArrayList<>();
-                listArgs.add("src/test/resources/" + properties.getProperty("spec"));
+                listArgs.add("src/main/resources/spec/" + properties.getProperty("spec"));
                 listArgs.add(getResultDirectory("spec_results.js"));
-                args = listArgs.toArray(String[]::new);
+                args = listArgs.stream().toArray(String[]::new);
             } else {
                 propertiesReader.updateProperty("output-file", getResultDirectory("results.csv"));
                 args = properties
