@@ -6,25 +6,33 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesReader {
-    private Properties properties;
-    private final String propertyName;
+    private static Properties properties;
+    private static PropertiesReader instance = null;
+    private static String propertyName;
 
     public PropertiesReader(String propertyName) {
-        this.propertyName = propertyName;
-    }
-
-    public Properties getProperties() {
+        PropertiesReader.propertyName = propertyName;
         properties = new Properties();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(this.propertyName)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PropertiesReader.propertyName)) {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static PropertiesReader getInstance() {
+        if (instance == null) {
+            instance = new PropertiesReader(propertyName);
+        }
+        return instance;
+    }
+
+    public Properties getProperties() {
         return properties;
     }
 
     public void updateProperty(String key, String value) {
-        try (FileOutputStream out = new FileOutputStream("src/main/resources/config/" + propertyName)) {
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/" + propertyName)) {
             properties.setProperty(key, value);
             properties.store(out, null);
         } catch (IOException e) {

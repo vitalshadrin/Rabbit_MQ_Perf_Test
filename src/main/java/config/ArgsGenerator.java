@@ -2,31 +2,47 @@ package config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
+import static config.PropertiesReader.getInstance;
 import static report.ReportTemplate.getResultDirectory;
 
 public class ArgsGenerator {
-    public static String[] args;
 
-    public static String[] getArgs(String propertyName) {
-        if (args == null) {
-            PropertiesReader propertiesReader = new PropertiesReader(propertyName);
-            Properties properties = propertiesReader.getProperties();
-            if (propertyName.contains("Multi")) {
-                List<String> listArgs = new ArrayList<>();
-                listArgs.add("src/main/resources/spec/" + properties.getProperty("spec"));
-                listArgs.add(getResultDirectory("spec_results.js"));
-                args = listArgs.stream().toArray(String[]::new);
-            } else {
-                propertiesReader.updateProperty("output-file", getResultDirectory("results.csv"));
-                args = properties
-                        .keySet()
-                        .stream()
-                        .map(key -> "-" + key + "=" + properties.get(key))
-                        .toArray(String[]::new);
-            }
+    public static String[] getArgs(RabbitConfigs rabbitConfigs, String specName) {
+        switch (rabbitConfigs) {
+            case PERF_TEST:
+                return getPerfConfigs();
+            case PERF_TEST_MULTI:
+                return getPerfMultiConfigs(specName);
         }
-        return args;
+        return null;
+    }
+
+    public static String[] getArgs(RabbitConfigs rabbitConfigs) {
+        new PropertiesReader("config/" + rabbitConfigs.getConfig());
+        switch (rabbitConfigs) {
+            case PERF_TEST:
+                return getPerfConfigs();
+            case PERF_TEST_MULTI:
+                return getPerfMultiConfigs(getInstance().getProperties().getProperty("spec"));
+        }
+        return null;
+    }
+
+    private static String[] getPerfConfigs() {
+        getInstance().updateProperty("output-file", getResultDirectory("results.csv"));
+        return getInstance().getProperties()
+                .keySet()
+                .stream()
+                .map(key -> "-" + key + "=" + getInstance().getProperties().get(key))
+                .toArray(String[]::new);
+    }
+
+    private static String[] getPerfMultiConfigs(String specName) {
+        List<String> listArgs = new ArrayList<String>() {{
+            add("src/main/resources/spec/" + specName);
+            add(getResultDirectory("spec_results.js"));
+        }};
+        return listArgs.toArray(new String[0]);
     }
 }

@@ -19,6 +19,7 @@ To get the result of the tests performed in graphs, you need to do the following
 * for **spec** property enter specification name from **src/main/resources/spec** (For example: spec=one-queue-spec.js)
 * navigate to console from the root directory
 * execute next command ::  **gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti run**
+* **gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti -Pargs="one-queue-spec.js" run**
 
 After the test is completed, a folder with the test execution report will be created in the folder **result** with name _perfTestMulti_result__(_date of completion)_
 
