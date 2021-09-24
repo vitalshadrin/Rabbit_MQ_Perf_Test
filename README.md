@@ -1,29 +1,47 @@
-# Rabbit MQ Perf Test
+# Rabbit MQ Performance Test
 
-##RabbitMQ PerfTest
+## 1. RabbitMQ PerfTest
 RabbitMQ has a throughput testing tool, PerfTest, that is based on the Java client and can be configured to simulate basic workloads and more advanced workloads as well.
 
-To run the **PerfTest**, you need to do the following: 
+To run the **PerfTest**, you need to do the following:
+
+### Running tests by specifying configurations from config file
 * navigate to **src/main/resources/config**
 * update or add parameters
 * navigate to console from the root directory
 * execute next command ::  **gradle -PmainClass=rabbit_perf/RabbitPerfTest run**
 
+### Reporting 
+
 After the test is completed, a folder with the test execution report will be created in the folder **result** with name _perfTest_result__(_date of completion)_
 
-##RabbitMQ PerfTestMulti
+## 2. RabbitMQ PerfTestMulti
 RabbitMQ created a couple of tools to facilitate benchmarking RabbitMQ in different usage scenarios. One part of these tools is the PerfTest Java class, the other part is a couple of HTML/JS tools that will let you plot the results obtained from the benchmarks into nicely looking graphs.
 
-To get the result of the tests performed in graphs, you need to do the following: 
-* navigate to **src/main/resources/config**
-* for **spec** property enter specification name from **src/main/resources/spec** (For example: spec=one-queue-spec.js)
+To get the result of the tests performed in graphs, you need to do the following:
+
+### Running tests by specifying configurations from config file
+* navigate to **src/main/resources/config/perfTestMulti.properties**
+* for **spec** property enter specification name from **src/main/resources/spec** 
+_(For example: spec=one-queue-spec.js)_
 * navigate to console from the root directory
 * execute next command ::  **gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti run**
-* **gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti -Pargs="one-queue-spec.js" run**
+
+### Running tests by specifying configurations from console
+
+* navigate to **src/main/resources/spec**
+* save in clipboard test specification name _(also you can to create you specification here)_
+* navigate to console from the root directory
+* execute next command :: **gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti -PrunArgs=="specification name" run** 
+_(For example: gradle -PmainClass=rabbit_perf/RabbitPerfTestMulti -PrunArgs="one-queue-single-active-consumers-spec.js" run)_
+
+
+### Reporting
 
 After the test is completed, a folder with the test execution report will be created in the folder **result** with name _perfTestMulti_result__(_date of completion)_
-
 To open the report, go to the folder with the report, find the html folder there and open _sample.html_
+
+
 
 
 

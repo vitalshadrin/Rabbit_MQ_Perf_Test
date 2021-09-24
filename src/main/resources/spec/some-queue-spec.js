@@ -1,6 +1,6 @@
 [
    {
-      "name":"spec-results",
+      "name":"some-queue-spec",
       "uri" : "amqp://localhost",
       "type":"simple",
       "params":[

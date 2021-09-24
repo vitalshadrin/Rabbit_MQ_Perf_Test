@@ -12,11 +12,11 @@
     $(document).ready(function() {
       var main_results;
         $.ajax({
-            url: 'spec_results.js',
+            url: 'spec_name.js',
             success: function(data) {
                 render_graphs(JSON.parse(data));
             },
-            fail: function() { alert('error loading spec_results.js'); }
+            fail: function() { alert('error loading spec_name.js'); }
         });
     });
     </script>
@@ -31,6 +31,6 @@
       data-x-axis="time (s)"
       data-y-axis="rate (msg/s)"
       data-y-axis2="latency (μs)"
-      data-scenario="spec-results"></div>
+      data-scenario="spec_name"></div>
   </body>
  </html>

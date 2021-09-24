@@ -25,3 +25,7 @@ dependencies {
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'
     }
 }
+
+run {
+    args findProperty('runArgs') == null ? "NULL" : findProperty('runArgs')
+}

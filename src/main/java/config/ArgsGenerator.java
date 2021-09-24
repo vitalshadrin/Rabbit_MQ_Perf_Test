@@ -41,7 +41,7 @@ public class ArgsGenerator {
     private static String[] getPerfMultiConfigs(String specName) {
         List<String> listArgs = new ArrayList<String>() {{
             add("src/main/resources/spec/" + specName);
-            add(getResultDirectory("spec_results.js"));
+            add(getResultDirectory(specName));
         }};
         return listArgs.toArray(new String[0]);
     }
