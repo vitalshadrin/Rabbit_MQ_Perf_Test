@@ -29,9 +29,10 @@ dependencies {
 }
 
 run {
-    if (mainClassName.contains('RabbitPerfTest')) {
-        args findProperty('options') == null ? 'NULL': findProperty('options').toString().split(" ")
-    } else {
+    if (mainClassName == 'rabbit_perf/RabbitPerfTest') {
+        args findProperty('options') == null ? 'NULL' : findProperty('options').toString().split(" ")
+    }
+    if (mainClassName == 'rabbit_perf/RabbitPerfTestMulti') {
         args findProperty('spec') == null ? 'NULL' : findProperty('spec')
     }
 }
