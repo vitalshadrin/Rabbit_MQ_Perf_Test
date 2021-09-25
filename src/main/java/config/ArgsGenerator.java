@@ -1,6 +1,7 @@
 package config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static config.PropertiesReader.getInstance;
@@ -36,6 +37,13 @@ public class ArgsGenerator {
                 .stream()
                 .map(key -> "-" + key + "=" + getInstance().getProperties().get(key))
                 .toArray(String[]::new);
+    }
+
+    public static String[] setReport(String[] args) {
+        return new ArrayList<String>() {{
+            addAll(Arrays.asList(args));
+            add("-output-file=" + getResultDirectory("results.csv"));
+        }}.toArray(new String[0]);
     }
 
     private static String[] getPerfMultiConfigs(String specName) {
