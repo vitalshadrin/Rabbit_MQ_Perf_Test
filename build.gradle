@@ -3,7 +3,7 @@ plugins {
 }
 
 application {
-    mainClassName = project.hasProperty('mainClass') ? 'rabbit_perf/' + project.getProperty('mainClass') : 'NULL'
+    mainClassName = project.hasProperty('rabbitMQTest') ? 'rabbit_perf/' + project.getProperty('rabbitMQTest') : 'NULL'
 }
 
 group 'Jopari Engineering'
