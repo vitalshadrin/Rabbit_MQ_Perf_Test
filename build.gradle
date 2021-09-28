@@ -19,7 +19,11 @@ dependencies {
     implementation 'com.rabbitmq:perf-test:2.16.0'
     implementation 'org.slf4j:slf4j-api:1.7.32'
     implementation 'com.google.code.gson:gson:2.8.8'
-    compileOnly 'org.projectlombok:lombok:1.18.20'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.5'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
     testImplementation 'org.slf4j:slf4j-simple:1.7.32'
     testImplementation 'org.assertj:assertj-core:3.20.2'
     testImplementation 'org.slf4j:slf4j-nop:1.7.32'
@@ -30,9 +34,10 @@ dependencies {
 
 run {
     if (mainClassName == 'rabbit_perf/RabbitPerfTest') {
-        args findProperty('options') == null ? 'NULL' : findProperty('options').toString().split(" ")
+        args findProperty('options') == null ? '' : findProperty('options').toString().split(" ")
     }
     if (mainClassName == 'rabbit_perf/RabbitPerfTestMulti') {
-        args findProperty('spec') == null ? 'NULL' : findProperty('spec')
+        args findProperty('spec') == null ? '' : findProperty('spec')
+        args findProperty('specArgs') == null ? '' : findProperty('specArgs')
     }
 }

@@ -43,6 +43,13 @@ To get the result of the tests performed in graphs, you need to do the following
 
 _For example: gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec="one-queue-single-active-consumers-spec.js" run_
 
+### Running tests by specifying configurations arguments from console
+* navigate to **src/main/resources/spec**
+* save in clipboard test specification name _(also you can to create you specification here)_
+* navigate to console from the root directory
+* execute next command :: **gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec=="specification name" -PspecArgs="option=value, option=value1;value2, ..." run**
+
+_For example: gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec="one-queue-single-active-consumers-spec.js" -PspecArgs="time-limit=30, queue-names=B1;B2;B3, auto-delete=true" run_
 
 ### Reporting
 
