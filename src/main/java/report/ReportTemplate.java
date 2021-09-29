@@ -23,12 +23,12 @@ public class ReportTemplate {
             Path resultDir;
             Path file;
             if (nameResults.contains(".js")) {
-                resultDir = Paths.get(resultsDir + "/perfTestMulti_result_" + getCurrentDate());
+                resultDir = Paths.get(resultsDir + "/perfTestMulti_result");
                 FileUtils.copyDirectory(new File(REPORT_TEMPLATE), new File(resultDir.toString()));
                 updatedReport(resultDir, nameResults);
                 file = Paths.get(resultDir + "/html/" + nameResults);
             } else {
-                resultDir = Files.createDirectory(Paths.get(resultsDir + "/perfTest_result_" + getCurrentDate()));
+                resultDir = Files.createDirectory(Paths.get(resultsDir + "/perfTest_result"));
                 file = Paths.get(resultDir + "/" + nameResults);
             }
             return Files.createFile(file).toString();
