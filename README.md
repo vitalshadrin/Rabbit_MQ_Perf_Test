@@ -49,6 +49,18 @@ _For example: gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec="one-queue-single
 * navigate to console from the root directory
 * execute next command :: **gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec=="specification name" -PspecArgs="option=value, option=value1;value2, ..." run**
 
+_Available options:_
+
+| Option | Description  | Type  | Example |
+| ------- | --- | --- | --- |
+| name | specification name | String | one-queue-single-active-consumers-spec.js |
+| uri | uri of rabbit mq server | String | amqp://localhost |
+| type | specification type | String | simple |
+| time-limit | specification time execution is seconds | Integer | 30 |
+| queue-names | queue names  | Array | A;B;C |
+| auto-delete | if set all created queue will be removed automatically | Boolean | true |
+| x-single-active-consumer | single active consumer (If set, makes sure only one consumer at a time consumes from the queue and fails over to another registered consumer in case the active one is cancelled or dies.) | Boolean | true |
+
 _For example: gradle -PrabbitMQTest=RabbitPerfTestMulti -Pspec="one-queue-single-active-consumers-spec.js" -PspecArgs="time-limit=30, queue-names=B1;B2;B3, auto-delete=true" run_
 
 ### Reporting
