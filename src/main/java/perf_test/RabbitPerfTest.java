@@ -1,4 +1,4 @@
-package rabbit_perf;
+package perf_test;
 
 import com.rabbitmq.perf.PerfTest;
 

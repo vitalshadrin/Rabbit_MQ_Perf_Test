@@ -1,10 +1,9 @@
 package config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import spec.Spec;
+import config.specification.Spec;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -52,7 +51,7 @@ public class ArgsGenerator {
     }
 
     private static String[] getPerfMultiConfigs(String specName, String specArgs) {
-        List<String> listArgs = new ArrayList<String>() {{
+        List<String> listArgs = new ArrayList<>() {{
             add(specArgs == null ? "src/main/resources/spec/" + specName : updatedSpec(specName, specArgs));
             add(getResultDirectory(specName));
         }};
@@ -66,7 +65,7 @@ public class ArgsGenerator {
         Spec[] data;
         Map<String, String> specMap = new HashMap<>();
         try {
-            specContent = new String(Files.readAllBytes(Paths.get(spec)), StandardCharsets.UTF_8);
+            specContent = Files.readString(Paths.get(spec));
             data = objectMapper.readValue(specContent, Spec[].class);
             Arrays.asList(specArgs.split(",")).forEach(specData ->
                     specMap.put(specData.split("=")[0].trim(), specData.split("=")[1].trim())

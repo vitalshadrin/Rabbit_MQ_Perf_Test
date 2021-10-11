@@ -1,4 +1,4 @@
-package spec;
+package config.specification;
 
 import lombok.Data;
 

@@ -3,11 +3,11 @@ plugins {
 }
 
 application {
-    mainClassName = project.hasProperty('rabbitMQTest') ? 'rabbit_perf/' + project.getProperty('rabbitMQTest') : 'NULL'
+    mainClassName = project.hasProperty('rabbitMQTest') ? 'perf_test/' + project.getProperty('rabbitMQTest') : 'NULL'
 }
 
 group 'Jopari Engineering'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -33,10 +33,10 @@ dependencies {
 }
 
 run {
-    if (mainClassName == 'rabbit_perf/RabbitPerfTest') {
+    if (mainClassName == 'perf_test/RabbitPerfTest') {
         args findProperty('options') == null ? '' : findProperty('options').toString().split(" ")
     }
-    if (mainClassName == 'rabbit_perf/RabbitPerfTestMulti') {
+    if (mainClassName == 'perf_test/RabbitPerfTestMulti') {
         args findProperty('spec') == null ? '' : findProperty('spec')
         args findProperty('specArgs') == null ? '' : findProperty('specArgs')
     }
